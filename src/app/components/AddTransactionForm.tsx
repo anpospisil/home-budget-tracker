@@ -9,7 +9,18 @@ export default function AddTransactionForm({ onSuccess }: { onSuccess?: () => vo
   const [note, setNote] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-
+const categories = [
+  "Rent",
+  "Utilities",
+  "Groceries",
+  "Transport",
+  "Health",
+  "Entertainment",
+  "Clothing",
+  "Personal Care",
+  "Travel",
+  "Miscellaneous",
+];
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setError(null)
@@ -67,14 +78,26 @@ export default function AddTransactionForm({ onSuccess }: { onSuccess?: () => vo
           className="p-2 border rounded"
           inputMode="decimal"
         />
-        <input
+      </div>
+  <div>
+        <label htmlFor="category" className="block text-sm font-medium text-gray-700">
+          Category
+        </label>
+        <select
+          id="category"
+          name="category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          placeholder="Category (e.g. Groceries)"
-          className="p-2 border rounded"
-        />
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 sm:text-sm"
+        >
+          <option value="">Select a category</option>
+          {categories.map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
+          ))}
+        </select>
       </div>
-
       <textarea
         value={note}
         onChange={(e) => setNote(e.target.value)}

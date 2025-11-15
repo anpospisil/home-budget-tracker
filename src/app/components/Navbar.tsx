@@ -10,7 +10,7 @@ export default function Navbar() {
           <h1 className="text-xl font-bold text-gray-800">Home Budget Tracker</h1>
         </Link>
         <div className="space-x-4">
-          <Link href="/" className="text-gray-600 hover:text-gray-800">
+          <Link href="/dashboard" className="text-gray-600 hover:text-gray-800">
             Dashboard
           </Link>
           <Link href="/transactions" className="text-gray-600 hover:text-gray-800">
