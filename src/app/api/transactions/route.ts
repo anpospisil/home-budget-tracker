@@ -44,3 +44,33 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: false, error: err.message }, { status: 500 })
   }
 }
+
+export async function DELETE(req: Request) {
+  try {
+    const body = await req.json()
+    const { id } = body
+
+    if (!id) {
+      return NextResponse.json(
+        { success: false, error: 'Missing transaction id' },
+        { status: 400 }
+      )
+    }
+
+    const tx = await prisma.transaction.delete({
+      where: { id },
+    })
+
+    return NextResponse.json(
+      { success: true, transaction: tx },
+      { status: 200 }
+    )
+  } catch (err: any) {
+    console.error(err)
+    return NextResponse.json(
+      { success: false, error: err.message },
+      { status: 500 }
+    )
+  }
+}
+
